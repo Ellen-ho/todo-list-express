@@ -11,6 +11,8 @@ if (process.env.NODE_ENV !== 'production') {
 const routes = require('./routes')
 require('./config/mongoose')
 
+const UsePassport = require('./config/passport')
+
 const app = express()
 const PORT = process.env.PORT || 3000
 
@@ -25,6 +27,8 @@ app.use(session({
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+
+UsePassport(app)
 
 app.use(routes)
 
