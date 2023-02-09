@@ -30,6 +30,12 @@ app.use(methodOverride('_method'))
 
 UsePassport(app)
 
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user//反序列化時放入
+  next()
+})
+
 app.use(routes)
 
 app.listen(PORT, () => {
