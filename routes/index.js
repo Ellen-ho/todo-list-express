@@ -5,8 +5,10 @@ const home = require('./modules/home')
 const todos = require('./modules/todos')
 const users = require('./modules/users')
 
-router.use('/', home)
-router.use('/todos', todos)
-router.use('/users', users)
+const { authenticator } = require('../middleware/auth')
+
+router.use('/todos', authenticator, todos)
+router.use('/users', users)//登入.註冊.登出不需擋住
+router.use('/', authenticator, home)
 
 module.exports = router
