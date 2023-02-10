@@ -15,13 +15,13 @@ require('./config/mongoose')
 const UsePassport = require('./config/passport')
 
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT 
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 
 app.use(session({
-  secret:"ThisIsMySecret",
+  secret:process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true //未登入過的使用者，未初始化的session建立後強制塞進去
 }))
